@@ -1,0 +1,66 @@
+/* 修改el-menu */
+.el-submenu__title {
+  padding: 0 5px !important;
+  margin: 0 15px;
+}
+/* 修改el-submenu */
+.el-menu--popup-bottom-start {
+  background-color: #fff !important;
+  padding: 0 !important;
+}
+
+.el-menu--popup-bottom-start li {
+  background-color: #fff !important;
+  text-align: center !important;
+}
+
+.el-menu--popup-bottom-start li:hover {
+  background-color: rgba(0, 0, 0, .2) !important;
+}
+
+.el-menu--horizontal>.el-submenu .el-submenu__title {
+  height: 50px !important;
+  line-height: 50px !important;
+}
+
+.el-menu--horizontal>.el-menu-item {
+  height: 50px !important;
+  line-height: 50px !important;
+}
+
+/* 修改el-tab */
+.el-tabs__item {
+  padding: 0 30px !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+}
+.el-tabs__content {
+  padding: 20px !important;
+}
+
+/* 修改分页器 */
+.el-pagination__jump {
+  margin-right: 20px !important;
+}
+.btn-prev,.btn-next {
+  padding: 8px 14px !important;
+  border:1px solid #5adace !important;
+}
+
+.btn-prev span,.btn-next span {
+  line-height: 10px !important;
+}
+
+/* 修改分割线 */
+.el-divider--horizontal {
+  height: 2px !important;
+}
+
+/* 修改省地市下拉框 */
+.area-select {
+  height: 40px !important;
+}
+
+.area-selected-trigger {
+  color: #bbb;
+}
