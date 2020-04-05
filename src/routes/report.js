@@ -1,7 +1,11 @@
 export default [
   {
-    path: 'userlist',
-    name: 'UserList',
-    component: '',
+    path: 'userreport',
+    name: 'UserReport',
+    component: () => import('@/components/report/user-report')
+  },
+  {
+    path: '/ydy/report',
+    redirect: 'userreport'
   }
 ]

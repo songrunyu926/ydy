@@ -1,6 +1,6 @@
 <template>
   <div>
-    business
+    <router-view></router-view>
   </div>
 </template>
 

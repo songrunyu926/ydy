@@ -36,7 +36,11 @@ import {
   Notification,
   Divider,
   Switch,
-  InputNumber
+  InputNumber,
+  Card,
+  Dialog,
+  Tag,
+  RadioButton
  } from 'element-ui'
 
 Vue.use(Button)
@@ -73,6 +77,10 @@ Vue.use(Loading.directive)
 Vue.use(Divider)
 Vue.use(Switch)
 Vue.use(InputNumber)
+Vue.use(Card)
+Vue.use(Dialog)
+Vue.use(Tag)
+Vue.use(RadioButton)
 
 Vue.prototype.$loading = Loading.service;
 Vue.prototype.$msgbox = MessageBox;

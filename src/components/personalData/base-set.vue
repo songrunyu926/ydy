@@ -33,7 +33,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="城市:" prop="city">
-          <area-cascader size="large" style="line-height: 24px;" :level="1" v-model="ruleForm.city" :data="pcaa" placeholder="请选择城市"></area-cascader>
+          <el-area></el-area>
         </el-form-item>
         <el-form-item label="街道地址:" prop="detailAddress" >
           <el-input v-model="ruleForm.detailAddress"></el-input>
@@ -66,14 +66,12 @@
 
 <script>
 
-import { pca, pcaa } from 'area-data'
+import elArea from '@/components/country-and-area/el-area'
 
 export default {
   name: "base-set",
   data() {
     return {
-      pca: pca,
-      pcaa: pcaa,
       ruleForm: {
         nickName: "",  //昵称
         abstract: "",  //个人简介
@@ -135,6 +133,15 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     }
+  },
+  components: {
+    'el-area': elArea
+  },
+  mounted() {
+    //订阅省市区组件的消息 定义form中的city字段
+    this.bus.$on('chooseCity',city => {
+      this.ruleForm.city = city
+    })
   }
 };
 </script>

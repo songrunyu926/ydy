@@ -17,7 +17,7 @@
         <span>您绑定的微信号:</span>
       </el-col>
       <el-col :span="9" :offset="1">
-        <el-input placeholder="未绑定微信" v-model="mobile" :disabled="true">
+        <el-input placeholder="未绑定微信" v-model="wechatAccount" :disabled="true">
         </el-input>
       </el-col>
       <el-col :span="3" :offset="2">
@@ -29,7 +29,13 @@
 
 <script>
 export default {
-  name: "account-bind"
+  name: "account-bind",
+  data() {
+    return {
+      mobile: '',
+      wechatAccount: ''
+    }
+  }
 };
 </script>
 
@@ -46,7 +52,7 @@ export default {
       margin-left: 20px;
     }
     button {
-      .button-type120(#5ADACE)
+      .button-type120(#5ADACE,#6CE6DB)
     }
   }
   .wechat {
@@ -55,7 +61,7 @@ export default {
       margin-left: 20px;
     }
     button {
-      .button-type120(#5ADACE)
+      .button-type120(#5ADACE,#6CE6DB)
     }
   }
 }

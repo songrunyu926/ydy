@@ -1,3 +1,11 @@
+import UserRoutes from './user'
+import BusinessRoutes from './business'
+import OrderRoutes from './order'
+import ReportRoutes from './report'
+import SendRoutes from './send'
+import personaldataRoutes from './personaldata'
+
+
 export default [
   {
     path: '/login',
@@ -17,32 +25,38 @@ export default [
       {
         path:'personaldata',
         name: 'PersonalData',
-        component: () => import('@/views/PersonalData.vue')
+        component: () => import('@/views/PersonalData.vue'),
+        children: personaldataRoutes
       },
       {
         path:'send',
         name: 'Send',
-        component: () => import('@/views/Send.vue')
+        component: () => import('@/views/Send.vue'),
+        children: SendRoutes
       },
       {
         path:'user',
         name: 'User',
-        component: () => import('@/views/User.vue')
+        component: () => import('@/views/User.vue'),
+        children: UserRoutes
       },
       {
         path:'business',
         name: 'Business',
-        component: () => import('@/views/Business.vue')
+        component: () => import('@/views/Business.vue'),
+        children: BusinessRoutes
       },
       {
         path:'order',
         name: 'Order',
-        component: () => import('@/views/Order.vue')
+        component: () => import('@/views/Order.vue'),
+        children: OrderRoutes
       },
       {
         path:'report',
         name: 'Report',
-        component: () => import('@/views/Report.vue')
+        component: () => import('@/views/Report.vue'),
+        children: ReportRoutes
       },
       {
         path:'/ydy',

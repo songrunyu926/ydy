@@ -2,22 +2,25 @@ export default [
   {
     path: 'salesman',
     name: 'Salesman',
-    component: '',
+    component: () => import('@/components/user/salesman'),
   },
   {
     path: 'negotiateuser',
     name: 'NegotiateUser',
-    component: '',
+    component: () => import('@/components/user/negotiateuser'),
   },
   {
     path: 'secondaryaccount',
     name: 'SecondaryAccount',
-    component: '',
+    component: () => import('@/components/user/secondaryaccount'),
   },
   {
     path: 'fans',
     name: 'Fans',
-    component: '',
+    component: () => import('@/components/user/fans'),
+  },
+  {
+    path:'/ydy/user',
+    redirect: 'salesman'
   }
-
 ]

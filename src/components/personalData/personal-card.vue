@@ -12,13 +12,13 @@
       <div class="card-header-right">
         <div class="right-container">
           <div>
-            <span>寄件链接</span>
-            <span ref="myLink">https://www.baidu/text/xxx.html</span>
+            <span style="color: #333;line-height: 35px">寄件链接</span>
+            <span style="color: #666;font-size: 14px;" ref="myLink">https://www.baidu/text/xxx.html</span>
           </div>
           <button @click.prevent="copyLink">复制</button>
           <div>
-            <span>Tips:可以将寄件链接发给你的朋友</span>
-            <span>点击链接即可快速下单给你</span>
+            <span style="color: #333;line-height: 35px;font-size: 14px;">Tips:可以将寄件链接发给你的朋友</span>
+            <span style="color: #333;font-size: 14px;">点击链接即可快速下单给你</span>
           </div>
         </div>
       </div>
@@ -266,11 +266,11 @@ export default {
       align-items: center;
       .left-tip {
         font-size: 18px;
-        color: #111;
+        color: #333;
         margin-bottom: 20px;
       }
       .left-btn {
-        .button-type120(#5adace);
+        .button-type120(#5adace,#6CE6DB);
         width: 220px;
       }
     }
@@ -295,14 +295,14 @@ export default {
           align-items: center;
         }
         button {
-          .button-type120(#fff);
+          .button-type120(#fff,#111);
           margin-top: -50px;
           width: 200px;
           height: 50px;
-          border: 1px solid #111;
+          border: 1px solid #333;
+          transition: all .5s;
           &:hover {
             color: #fff;
-            background: rgba(0, 0, 0, 0.7);
           }
         }
       }
@@ -314,7 +314,7 @@ export default {
     padding: 80px 0;
     .title {
       font-size: 18px;
-      color: #111;
+      color: #333;
       margin-bottom: 40px;
       padding-left: 20px;
     }
@@ -325,7 +325,7 @@ export default {
       margin-bottom: 40px;
     }
     .add-btn {
-      .button-type120(#6aed6d);
+      .button-type120(#6aed6d ,#81F484);
       width: 150px;
       margin-bottom: 30px;
     }
@@ -334,25 +334,25 @@ export default {
 
 // 按钮样式
 .edit-btn {
-  .button-type60(#76bef5);
+  .button-type60(#76bef5,#86C8F8);
   width: 40px;
   height: 26px;
   margin: 3px;
 }
 .del-btn {
-  .button-type60(#fb8888);
+  .button-type60(#fb8888 ,#FB9E9E);
   width: 40px;
   height: 26px;
   margin: 3px;
 }
 .copy-btn {
-  .button-type60(#6aed6d);
+  .button-type60(#6aed6d,#81F484);
   width: 90px;
   height: 26px;
   margin: 3px;
 }
 .download-btn {
-  .button-type60(#efdd49);
+  .button-type60(#efdd49 ,#F6E661);
   width: 80px;
   height: 26px;
 }

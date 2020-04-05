@@ -3,6 +3,20 @@
   padding: 0 5px !important;
   margin: 0 15px;
 }
+
+.el-menu-item {
+  font-size: 16px !important;
+  height: 50px !important;
+  line-height: 50px !important;
+  color: #111 !important;
+  padding: 0 30px !important;
+  border: 0 !important;
+}
+
+.el-menu-item.is-active {
+  border: 0 !important;
+  background-color: #5ADACE !important;
+}
 /* 修改el-submenu */
 .el-menu--popup-bottom-start {
   background-color: #fff !important;
@@ -64,3 +78,43 @@
 .area-selected-trigger {
   color: #bbb;
 }
+
+/* 修改弹出框头部dialog */
+.el-dialog__header {
+  background-color: #5ADACE;
+}
+
+/* 修改card */
+.el-card__body {
+  padding: 0 !important;
+}
+/* 修改表格样式 */
+.el-table th{
+  background-color: #5adace !important;
+  color: #111 !important;
+}
+/* 修改拖拽上传 */
+.el-upload-dragger {
+  width: 351px !important;
+  height: 120px !important;
+}
+
+/* 修改单选组 */
+.el-radio-button__inner{
+  border: 1px solid #888 !important;
+  color: #888 !important;
+}
+/* 表格特殊字段文字颜色 */
+.blue {
+  color: #0056cc;
+}
+.red {
+  color: #E20000;
+}
+.green {
+  color: #02A306;
+}
+.gray {
+  color: #999999;
+}
+

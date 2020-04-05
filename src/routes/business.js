@@ -2,11 +2,15 @@ export default [
   {
     path: 'couriercompany',
     name: 'CourierCompany',
-    component: '',
+    component: () => import('@/components/business/courier-company.vue')
   },
   {
     path: 'printer',
     name: 'Printer',
-    component: '',
+    component: () => import('@/components/business/printer.vue')
+  },
+  {
+    path: '/ydy/business',
+    redirect: 'couriercompany'
   }
 ]

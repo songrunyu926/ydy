@@ -46,6 +46,7 @@ const copyToClipboard = function (elem) {
   return succeed;
 }
 
+
 export default {
   copyToClipboard
 }

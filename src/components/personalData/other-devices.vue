@@ -28,6 +28,11 @@ export default {
       notice: "1",
       num: "1000" //打印机默认共享总量  1000
     };
+  },
+  methods: {
+    handleChange() {
+      
+    }
   }
 };
 </script>
@@ -44,7 +49,7 @@ export default {
     color: #E20000;
   }
   .save {
-    .button-type120(#5ADACE);
+    .button-type120(#5ADACE,#6CE6DB);
     display: inline-block;
     margin-left: 40px;
   }

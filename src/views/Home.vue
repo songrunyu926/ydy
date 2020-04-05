@@ -7,10 +7,7 @@
       <div class="container">
         <p class="breadcrumb-tip">您的位置:</p>
         <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item>首页</el-breadcrumb-item>
-          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-          <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+          <el-breadcrumb-item v-for="(item, index) in breadcrumbContent" :key="index">{{item}}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
     </section>
@@ -25,49 +22,76 @@
       <li>
         <i class="iconfont icon-erweima"></i>
         <span>微信下单</span>
-        </li>
-      <li>
+      </li>
+      <li @click="$router.push('/ydy/send')">
         <i class="iconfont icon-dingdan"></i>
-        <span>添加订单</span></li>
+        <span>添加订单</span>
+      </li>
       <li @click="backTop">
         <i class="iconfont icon-fanhuidingbu1"></i>
       </li>
     </ul>
+    
   </div>
 </template>
 
 <script>
-
 //结构组件
-import mainHeader from '@/components/main-construction/main-header.vue';
-import mainFooter from '@/components/main-construction/main-footer.vue';
+import mainHeader from "@/components/main-construction/main-header.vue";
+import mainFooter from "@/components/main-construction/main-footer.vue";
+
+import { bbObj } from "../config";
 
 export default {
   name: "Home",
   data() {
-    return {
-      
-    };
+    return {};
   },
   methods: {
     handleSelect() {},
     backTop() {
-      if(document.documentElement.scrollTop > 150) {
+      if (document.documentElement.scrollTop > 150) {
         const timer = setInterval(() => {
-          let st = document.documentElement.scrollTop - 40
-          if(document.documentElement.scrollTop > 0) {
-            document.documentElement.scrollTop = st
-          }else {
-            document.documentElement.scrollTop = 0
-            clearInterval(timer)
+          let st = document.documentElement.scrollTop - 40;
+          if (document.documentElement.scrollTop > 0) {
+            document.documentElement.scrollTop = st;
+          } else {
+            document.documentElement.scrollTop = 0;
+            clearInterval(timer);
           }
-        },10)
+        }, 10);
       }
     }
   },
   components: {
-    'main-header': mainHeader,
-    'main-footer': mainFooter
+    "main-header": mainHeader,
+    "main-footer": mainFooter
+  },
+  computed: {
+    //面包屑导航内容
+    breadcrumbContent() {
+      //导航数组  初始化第一个位置
+      let breadcrumbArr = ["云打印"];
+      //获取导航数组
+      const pathArr = this.$route.path.split("/").filter(item => item !== "");
+      //导航数组的第二个位置
+      breadcrumbArr.push(bbObj[pathArr[1]].name);
+      //导航数组的第三个位置
+      if (pathArr[1] === "order") {
+        breadcrumbArr.push(
+          (bbObj[pathArr[1]]).children[pathArr[2]]['name']
+        );
+        //导航第四个位置
+        breadcrumbArr.push(
+          bbObj[pathArr[1]].children[pathArr[2]].type[+pathArr[3] - 1]
+        );
+      } else {
+        breadcrumbArr.push(
+          bbObj[pathArr[1]].children[pathArr[2]]
+        );
+      }
+      return breadcrumbArr
+    }
   }
 };
 </script>
