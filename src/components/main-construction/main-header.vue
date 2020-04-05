@@ -61,7 +61,6 @@ export default {
   },
   methods: {
     handleSelect() {
-      console.log(this.$route)
     }
   },
   computed: {
