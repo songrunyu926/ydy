@@ -50,6 +50,7 @@
                 v-model="printForm.allotUser"
                 placeholder="请选择分配对象"
                 style="width: 400px;"
+                size="small"
               >
                 <el-option label="分配1" value="1"></el-option>
                 <el-option label="分配2" value="2"></el-option>
@@ -63,18 +64,20 @@
                 :min="1"
                 :max="1000"
                 label="描述文字"
+                size="small"
               ></el-input-number>
             </el-form-item>
           </el-col>
         </el-row>
 
-        <el-row :gutter="60" style="margin-top: 40px;">
+        <el-row :gutter="60" style="margin-top: 30px;">
           <el-col :span="12">
             <el-form-item label="选择打印机:" prop="printer">
               <el-select
                 v-model="printForm.printer"
                 placeholder="请选择打印机"
                 style="width: 400px;"
+                size="small"
               >
                 <el-option label="打印机1" value="1"></el-option>
                 <el-option label="打印机2" value="2"></el-option>
@@ -86,7 +89,7 @@
           </el-col>
         </el-row>
       </el-form>
-      <el-row :gutter="60" style="margin-top: 60px">
+      <el-row :gutter="60" style="margin-top: 30px">
         <el-col :span="6" :offset="6">
           <button class="confirm-btn">打印订单</button>
         </el-col>
@@ -99,115 +102,106 @@
     <el-dialog
       title="历史分配记录"
       :visible.sync="historyDialogVisible"
-      width="60%"
+      top="5vh"
+      width="70%"
       center
     >
-      <!-- 第一行查询 -->
-      <el-row :gutter="60" style="margin-top: 40px">
-        <el-col :span="12">
-          <div>
-            使用状态：
-            <el-select
-              v-model="value"
-              placeholder="请选择"
-              style="width: 400px;"
-            >
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+      <!--查询表单-->
+      <el-form
+        size="small"
+        ref="ecodeSearchForm"
+        :model="ecodeSearchForm"
+        label-width="80px"
+      >
+        <el-row>
+          <el-col :span="6">
+            <el-form-item label="使用状态:">
+              <el-select
+                v-model="ecodeSearchForm.useState"
+                placeholder="请选择使用状态"
               >
-              </el-option>
-            </el-select>
-          </div>
-        </el-col>
-        <el-col :span="12">
-          <div>
-            打印状态：
-            <el-select
-              v-model="value"
-              placeholder="请选择"
-              style="width: 400px;"
-            >
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="打印状态:">
+              <el-select
+                v-model="ecodeSearchForm.printState"
+                placeholder="请选择打印状态"
               >
-              </el-option>
-            </el-select>
-          </div>
-        </el-col>
-      </el-row>
-      <!-- 第二行查询 -->
-      <el-row :gutter="60" style="margin-top: 40px">
-        <el-col :span="12">
-          <div>
-            分配对象：
-            <el-select
-              v-model="value"
-              placeholder="请选择"
-              style="width: 400px;"
-            >
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="分配对象:">
+              <el-select
+                v-model="ecodeSearchForm.allotUser"
+                placeholder="请选择分配对象"
               >
-              </el-option>
-            </el-select>
-          </div>
-        </el-col>
-        <el-col :span="12">
-          <el-row :gutter="20">
-            <el-col :span="4" offset="1">
-              <span style="line-height: 40px">E邮码:</span>
-            </el-col>
-            <el-col :span="17" pull="1">
-              <el-input placeholder="请输入E邮码" v-model="ecode"> </el-input>
-            </el-col>
-          </el-row>
-        </el-col>
-      </el-row>
-      <!-- 时间1 -->
-      <el-row :gutter="60" style="margin-top: 40px">
-        <el-col :span="3" style="line-height: 45px">
-          <span>分配时间:</span>
-        </el-col>
-        <el-col :span="9" pull="1">
-          <el-date-picker
-            v-model="value2"
-            type="datetimerange"
-            :picker-options="pickerOptions"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            align="right"
-          >
-          </el-date-picker>
-        </el-col>
-      </el-row>
-      <!-- 时间2 -->
-      <el-row :gutter="60" style="margin-top: 40px">
-        <el-col :span="3" style="line-height: 45px">
-          <span>打印时间:</span>
-        </el-col>
-        <el-col :span="9" pull="1">
-          <el-date-picker
-            v-model="value2"
-            type="datetimerange"
-            :picker-options="pickerOptions"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            align="right"
-          >
-          </el-date-picker>
-        </el-col>
-      </el-row>
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="E邮码:">
+              <el-input
+                placeholder="请输入E邮码"
+                v-model="ecodeSearchForm.ecode"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="分配时间:">
+              <el-date-picker
+                v-model="ecodeSearchForm.allotTime"
+                type="datetimerange"
+                :picker-options="pickerOptions"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                align="right"
+              >
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="打印时间:">
+              <el-date-picker
+                v-model="ecodeSearchForm.printTime"
+                type="datetimerange"
+                :picker-options="pickerOptions"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                align="right"
+              >
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
       <!-- 查询按钮 -->
       <div class="dialog-btn">
         <button class="search-btn">
@@ -225,49 +219,49 @@
           批量作废
         </button>
       </div>
+       <!-- 显示当前选中的项目数 -->
+    <div style="margin: 20px 0 20px;font-size: 12px">
+      <span
+        >当前选中<span style="color: red;margin: 0 10px;font-size: 14px">{{
+          selection.length
+        }}</span
+        >条</span
+      >
+    </div>
       <!-- 表格 -->
       <el-table
         ref="addressTable"
         :data="
-          addressBook.slice(
-            (currentPage - 1) * pageSize,
-            currentPage * pageSize
-          )
+          showList
         "
         stripe
         border
         highlight-current-row
-        style="width: 100%; margin-top: 40px"
-        @selection-change="SelectionChange"
+        style="width: 100%; margin-top: 10px"
+        @selection-change="selectionChange"
+        size="small"
       >
         <el-table-column type="selection" width="60">
-          <template slot="header">
-            <span>选择</span>
-          </template>
         </el-table-column>
-        <el-table-column prop="date" label="日期" width="120" align="center">
+       <el-table-column type="index" label="序号" width="65" align="center">
         </el-table-column>
-        <el-table-column prop="tag" label="标签" width="70" align="center">
+                <el-table-column prop="allotUser" label="分配对象" width="110" align="center">
         </el-table-column>
-        <el-table-column prop="realName" label="实名" width="70" align="center">
+        <el-table-column prop="ecode" label="E邮码号" width="190" align="center">
         </el-table-column>
-        <el-table-column prop="name" label="姓名" width="90" align="center">
+        <el-table-column prop="useState" label="使用状态" width="100" align="center">
         </el-table-column>
-        <el-table-column prop="tel" label="电话" width="120" align="center">
+        <el-table-column prop="allotPerson" label="分配人" width="100" align="center">
         </el-table-column>
-        <el-table-column prop="address" label="地址" width="330" align="center">
+        <el-table-column prop="allotTime" label="分配时间" width="200" align="center">
         </el-table-column>
-        <el-table-column label="操作" align="center">
-          <template slot-scope="scope">
-            <button class="edit-btn">编辑</button>
-            <button class="del-btn" @click="delContact(scope.$index)">
-              删除
-            </button>
-          </template>
+        <el-table-column prop="printTime" label="打印时间" width="200" align="center">
+        </el-table-column>
+        <el-table-column prop="printState" label="打印状态" width="100" align="center">
         </el-table-column>
       </el-table>
       <!-- 分页器 -->
-      <div style="margin:60px 0;">
+      <div style="margin:30px 0;">
         <el-pagination
           style="float: right;"
           background
@@ -277,7 +271,7 @@
           :page-sizes="[5, 10, 15, 20]"
           :page-size="100"
           layout="total, sizes, jumper, prev, pager, next "
-          :total="addressBook.length"
+          :total="allotRecord.length"
           prev-text="上一页"
           next-text="下一页"
         >
@@ -298,9 +292,17 @@ export default {
   data() {
     return {
       printForm: {
-        printer: "",
-        orderNum: "",
-        allotNum: 1
+        allotUser: "",
+        allotNum: 100,
+        printer: 0
+      },
+      ecodeSearchForm: {
+        useState: "",
+        printState: "",
+        allotUser: "",
+        ecode: "",
+        allotTime: "",
+        printTime: ""
       },
       rules: {
         allotUser: [
@@ -337,114 +339,116 @@ export default {
       value: "",
       ecode: "",
       pickerOptions: timeoptions,
-      addressBook: [
+      allotRecord: [
         {
           id: 1,
-          date: "2016-05-02",
-          tag: "好友",
-          realName: "已实名",
-          name: "王小虎",
-          tel: "18356289987",
-          address: "安徽省铜陵市铜官区罗家村小区17栋205室的多的"
+          allotUser: 'xxxxxx  ',
+          ecode: 'xxxxxxxxxxxxxxxxx',
+          useState: '已使用',
+          allotPerson: 'wqewe',
+          allotTime: '12:12:12 12:12:12',
+          printTime: '12:12:12 12:12:12',
+          printState: '为打印'
         },
         {
           id: 2,
-          date: "2017-05-02",
-          tag: "好友",
-          realName: "已实名",
-          name: "王小虎",
-          tel: "18356289987",
-          address: "上海市普陀区金沙江路1518弄"
+         allotUser: 'xxxxxx  ',
+          ecode: 'xxxxxxxxxxxxxxxxx',
+          useState: '已使用',
+          allotPerson: 'wqewe',
+          allotTime: '12:12:12 12:12:12',
+          printTime: '12:12:12 12:12:12',
+          printState: '为打印'
         },
         {
           id: 3,
-          date: "2018-05-02",
-          tag: "好友",
-          realName: "已实名",
-          name: "王小虎",
-          tel: "18356289987",
-          address: "上海市普陀区金沙江路1518弄"
+         allotUser: 'xxxxxx  ',
+          ecode: 'xxxxxxxxxxxxxxxxx',
+          useState: '已使用',
+          allotPerson: 'wqewe',
+          allotTime: '12:12:12 12:12:12',
+          printTime: '12:12:12 12:12:12',
+          printState: '为打印'
         },
         {
           id: 4,
-          date: "2019-05-02",
-          tag: "好友",
-          realName: "已实名",
-          name: "王小虎",
-          tel: "18356289987",
-          address: "上海市普陀区金沙江路1518弄"
+         allotUser: 'xxxxxx  ',
+          ecode: 'xxxxxxxxxxxxxxxxx',
+          useState: '已使用',
+          allotPerson: 'wqewe',
+          allotTime: '12:12:12 12:12:12',
+          printTime: '12:12:12 12:12:12',
+          printState: '为打印'
         },
         {
           id: 5,
-          date: "2016-05-02",
-          tag: "好友",
-          realName: "已实名",
-          name: "王小虎",
-          tel: "18356289987",
-          address: "上海市普陀区金沙江路1518弄"
+         allotUser: 'xxxxxx  ',
+          ecode: 'xxxxxxxxxxxxxxxxx',
+          useState: '已使用',
+          allotPerson: 'wqewe',
+          allotTime: '12:12:12 12:12:12',
+          printTime: '12:12:12 12:12:12',
+          printState: '为打印'
         },
         {
           id: 6,
-          date: "2016-05-02",
-          tag: "好友",
-          realName: "已实名",
-          name: "王小虎",
-          tel: "18356289987",
-          address: "上海市普陀区金沙江路1518弄"
+         allotUser: 'xxxxxx  ',
+          ecode: 'xxxxxxxxxxxxxxxxx',
+          useState: '已使用',
+          allotPerson: 'wqewe',
+          allotTime: '12:12:12 12:12:12',
+          printTime: '12:12:12 12:12:12',
+          printState: '为打印'
         },
         {
           id: 7,
-          date: "2016-05-02",
-          tag: "好友",
-          realName: "已实名",
-          name: "王小虎",
-          tel: "18356289987",
-          address: "上海市普陀区金沙江路1518弄"
+         allotUser: 'xxxxxx  ',
+          ecode: 'xxxxxxxxxxxxxxxxx',
+          useState: '已使用',
+          allotPerson: 'wqewe',
+          allotTime: '12:12:12 12:12:12',
+          printTime: '12:12:12 12:12:12',
+          printState: '为打印'
         },
         {
           id: 8,
-          date: "2016-05-02",
-          tag: "好友",
-          realName: "已实名",
-          name: "王小虎",
-          tel: "18356289987",
-          address: "上海市普陀区金沙江路1518弄"
+          allotUser: 'xxxxxx  ',
+          ecode: 'xxxxxxxxxxxxxxxxx',
+          useState: '已使用',
+          allotPerson: 'wqewe',
+          allotTime: '12:12:12 12:12:12',
+          printTime: '12:12:12 12:12:12',
+          printState: '为打印'
         },
         {
           id: 9,
-          date: "2016-05-02",
-          tag: "好友",
-          realName: "已实名",
-          name: "王小虎",
-          tel: "18356289987",
-          address: "上海市普陀区金沙江路1518弄"
+          allotUser: 'xxxxxx  ',
+          ecode: 'xxxxxxxxxxxxxxxxx',
+          useState: '已使用',
+          allotPerson: 'wqewe',
+          allotTime: '12:12:12 12:12:12',
+          printTime: '12:12:12 12:12:12',
+          printState: '为打印'
         },
         {
           id: 10,
-          date: "2016-05-02",
-          tag: "好友",
-          realName: "已实名",
-          name: "王小虎",
-          tel: "18356289987",
-          address: "上海市普陀区金沙江路1518弄"
+         allotUser: 'xxxxxx  ',
+          ecode: 'xxxxxxxxxxxxxxxxx',
+          useState: '已使用',
+          allotPerson: 'wqewe',
+          allotTime: '12:12:12 12:12:12',
+          printTime: '12:12:12 12:12:12',
+          printState: '为打印'
         },
         {
           id: 11,
-          date: "2016-05-02",
-          tag: "好友",
-          realName: "已实名",
-          name: "王小虎",
-          tel: "18356289987",
-          address: "上海市普陀区金沙江路1518弄"
-        },
-        {
-          id: 12,
-          date: "2016-05-02",
-          tag: "好友",
-          realName: "已实名",
-          name: "王小虎",
-          tel: "18356289987",
-          address: "上海市普陀区金沙江路1518弄"
+          allotUser: 'xxxxxx  ',
+          ecode: 'xxxxxxxxxxxxxxxxx',
+          useState: '已使用',
+          allotPerson: 'wqewe',
+          allotTime: '12:12:12 12:12:12',
+          printTime: '12:12:12 12:12:12',
+          printState: '为打印'
         }
       ],
       selection: [],
@@ -454,13 +458,10 @@ export default {
     };
   },
   methods: {
-     //表格选择改变的触发事件
-    SelectionChange(selection) {
+    //表格选择改变的触发事件
+    selectionChange(selection) {
       //拿到选中的数据
       this.selection = selection;
-    },
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
     },
     //切换分页器的显示数
     handleSizeChange(val) {
@@ -469,7 +470,16 @@ export default {
     //切换当前显示页
     handleCurrentChange(val) {
       this.currentPage = val;
-    },
+    }
+  },
+  computed: {
+    //展示数据
+    showList() {
+      return this.allotRecord.slice(
+        (this.currentPage - 1) * this.pageSize,
+        this.currentPage * this.pageSize
+      );
+    }
   }
 };
 </script>
@@ -478,24 +488,25 @@ export default {
 @import url("../../assets/less/mixin");
 
 .ecode-container {
-  padding: 80px;
+  padding: 30px 80px;
   .ecode-know {
     width: 1040px;
-    height: 680px;
+    height: 570px;
     background: #eeeeee;
     box-sizing: border-box;
-    padding: 50px 50px 20px 50px;
-    margin-bottom: 80px;
+    padding: 50px 50px 0 50px;
+    margin-bottom: 30px;
     color: #333;
+    font-size: 14px;
     .know-title {
       font-size: 18px;
-      margin-bottom: 25px;
+      margin-bottom: 15px;
     }
     .know-tip {
       line-height: 1.6;
     }
     ul {
-      margin: 20px 0;
+      margin: 10px 0;
       display: flex;
       justify-content: space-between;
       li {
@@ -523,7 +534,7 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 60px;
+      margin-bottom: 20px;
     }
   }
   .ecode-allot {
@@ -531,12 +542,13 @@ export default {
       display: flex;
       justify-content: start;
       align-items: center;
-      margin-bottom: 70px;
+      margin-bottom: 30px;
       p {
         font-size: 18px;
         margin-right: 40px;
       }
       span {
+        font-size: 14px;
         color: #0056cc;
         &:hover {
           color: #f40;
@@ -545,8 +557,9 @@ export default {
     }
     .allot-form {
       .print-test {
+        margin-top: 4px;
         .button-type120(#efdd49, #f6e661);
-        width: 250px;
+        width: 200px;
       }
     }
     .confirm-btn {
@@ -563,12 +576,11 @@ export default {
     }
   }
   .dialog-btn {
-    margin-top: 40px;
     display: flex;
-    padding-left: 50px;
+    padding-left: 30px;
     .search-btn {
       .button-type120(#5adace, #6ce6db);
-      margin-right: 40px;
+      margin-right: 20px;
     }
     .reset-btn {
       .button-type120(#fff, #111);
@@ -579,9 +591,8 @@ export default {
     }
   }
   .small-btn {
-    margin-top: 70px;
+    margin-top: 30px;
     display: flex;
-    padding-left: 50px;
     button {
       .button-type120(#fff, #111);
       width: 80px;
@@ -595,7 +606,7 @@ export default {
   }
   .dialog-footer {
     display: block;
-    margin-top: 40px;
+    margin-top: 20px;
   }
 }
 </style>

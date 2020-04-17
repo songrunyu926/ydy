@@ -1,38 +1,6 @@
 <template>
   <div class="send-batch">
-    <div class="send-model">
-      <div class="send-header clearfix">
-        <p class="header-tag">收</p>
-        <span class="header-title">收件人信息</span>
-      </div>
-      <div class="send-body">
-        <el-upload
-          class="upload"
-          drag
-          action="https://jsonplaceholder.typicode.com/posts/"
-        >
-          <i class="iconfont icon-shangchuan1"></i>
-          <div class="el-upload__text">
-            将文件拖到此处，或<em>点击上传</em>
-            <span> 单表内容建议不超过500行 </span>
-          </div>
-        </el-upload>
-      </div>
-      <div class="send-footer">
-        <el-row>
-          <el-col :span="3">
-            <span>请先下载模版:</span>
-          </el-col>
-          <el-col :span="10">
-            <el-radio v-model="includeModel" :label="1">含寄件人模版</el-radio>
-            <el-radio v-model="includeModel" :label="2"
-              >不含寄件人模版</el-radio
-            >
-          </el-col>
-        </el-row>
-      </div>
-    </div>
-    <div class="send-model">
+     <div class="send-model">
       <div class="send-header clearfix">
         <p class="header-tag2">寄</p>
         <span class="header-title">寄件人信息</span>
@@ -60,24 +28,56 @@
         </el-switch>
       </div>
     </div>
+    <div class="send-model">
+      <div class="send-header clearfix">
+        <p class="header-tag">收</p>
+        <span class="header-title">收件人信息</span>
+      </div>
+      <div class="send-body">
+        <el-upload
+          class="upload"
+          drag
+          action="https://jsonplaceholder.typicode.com/posts/"
+        >
+          <i class="iconfont icon-shangchuan1"></i>
+          <div class="el-upload__text">
+            将文件拖到此处，或<em>点击上传</em>
+            <span> 单表内容建议不超过500行 </span>
+          </div>
+        </el-upload>
+      </div>
+      <div class="send-footer">
+        <el-row>
+          <el-col :span="3">
+            <span style="font-size: 14px;line-height: 2.4">请先下载模版:</span>
+          </el-col>
+          <el-col :span="10">
+            <el-button size="small">下载含寄件人模版</el-button>
+            <el-button size="small"
+              >下载不含寄件人模版</el-button
+            >
+          </el-col>
+        </el-row>
+      </div>
+    </div>   
     <div class="confirm-print">
       <el-row>
         <el-col :span="3">
-          <span style="line-height: 2.6;padding-left: 40px;">付款方式:</span>
+          <span style="font-size: 14px;line-height: 2.6;padding-left: 40px;">付款方式:</span>
         </el-col>
         <el-col :span="6">
-          <el-select v-model="value" placeholder="请选择" style="width: 350px;">
+          <el-select size="small" v-model="payType" placeholder="请选择" style="width: 350px;">
             <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="(value, index) in options"
+              :key="index"
+              :label="value"
+              :value="index"
             >
             </el-option>
           </el-select>
         </el-col>
       </el-row>
-      <el-row :gutter="60" style="margin-top: 60px">
+      <el-row :gutter="60" style="margin-top: 30px">
         <el-col :span="6" :offset="12">
           <button class="confirm-btn">打印订单</button>
         </el-col>
@@ -93,9 +93,13 @@ export default {
   name: "send-batch",
   data() {
     return {
-      includeModel: 1, //是否包含寄件人模版
       useType: 1, //1 使用地址簿  2 使用导入寄件人
-      subscribeLogistics: true  //是否订阅物流
+      subscribeLogistics: true,  //是否订阅物流
+      options: [
+        '到付',
+        '月结'
+      ],
+      payType: undefined  //付款方式
     };
   }
 };
@@ -105,16 +109,16 @@ export default {
 @import url("../../assets/less/mixin");
 
 .send-batch {
-  padding: 80px;
+  padding: 30px 40px;
   .send-model {
-    padding-bottom: 80px;
-    margin-bottom: 80px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
     border-bottom: 1px solid #ccc;
     .send-header {
       display: flex;
       justify-content: start;
       align-items: center;
-      margin-bottom: 60px;
+      margin-bottom: 20px;
       .header-tag {
         width: 30px;
         height: 37px;
@@ -145,20 +149,21 @@ export default {
       .upload {
         .icon-shangchuan1 {
           display: block;
-          font-size: 45px;
+          font-size: 25px;
           color: #999;
-          margin: 15px 0 10px;
+          margin: 10px 0 5px;
         }
         .el-upload__text {
           display: block;
           margin: 0 auto;
           width: 200px;
+          font-size: 12px;
           line-height: 1.4;
         }
       }
     }
     .send-footer {
-      margin-top: 60px;
+      margin-top: 30px;
       .repeat-order {
         margin: 0 40px 0 20px;
       }
@@ -193,7 +198,7 @@ export default {
       }
     }
     .parcel-footer {
-      margin-top: 40px;
+      margin-top: 20px;
     }
   }
   .confirm-print {

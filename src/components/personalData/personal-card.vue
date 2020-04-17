@@ -1,28 +1,6 @@
 <template>
-  <div class="personal-card">
-    <div class="card-header">
-      <div class="card-header-left">
-        <p class="left-tip">扫描二维码快速寄件</p>
-        <img
-          src="../../assets/images/login/card-ercode.jpeg"
-          alt="二维码加载失败"
-        />
-        <button class="left-btn">点击下载高清二维码</button>
-      </div>
-      <div class="card-header-right">
-        <div class="right-container">
-          <div>
-            <span style="color: #333;line-height: 35px">寄件链接</span>
-            <span style="color: #666;font-size: 14px;" ref="myLink">https://www.baidu/text/xxx.html</span>
-          </div>
-          <button @click.prevent="copyLink">复制</button>
-          <div>
-            <span style="color: #333;line-height: 35px;font-size: 14px;">Tips:可以将寄件链接发给你的朋友</span>
-            <span style="color: #333;font-size: 14px;">点击链接即可快速下单给你</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="personal-card" style="padding: 0 20px">
+    <card-model></card-model>
     <div class="live-post-code">
       <p class="title">直播订单码</p>
       <div class="explain">
@@ -73,9 +51,10 @@
           label="寄件地址"
           width="300"
           align="center"
+          show-overflow-tooltip
         >
         </el-table-column>
-        <el-table-column prop="tip" label="备注" width="80" align="center">
+        <el-table-column prop="tip" label="备注" width="80" align="center" show-overflow-tooltip>
         </el-table-column>
         <el-table-column label="操作" align="center">
           <template>
@@ -137,9 +116,10 @@
           label="收件地址"
           width="300"
           align="center"
+          show-overflow-tooltip
         >
         </el-table-column>
-        <el-table-column prop="tip" label="备注" width="80" align="center">
+        <el-table-column prop="tip" label="备注" width="80" align="center" show-overflow-tooltip>
         </el-table-column>
         <el-table-column label="操作" align="center">
           <template>
@@ -155,7 +135,9 @@
 </template>
 
 <script>
-import util from "@/util";
+
+import cardModel from '../personal-card/card-model'
+
 
 export default {
   name: "personal-card",
@@ -169,8 +151,8 @@ export default {
           postName: "王小虎",
           postTel: "18089798765",
           realName: "王大帅",
-          postAddress: "安徽省铜陵市铜官区罗家村小区17栋205室大",
-          tip: "这是备注"
+          postAddress: "萨达萨达萨达安徽省铜陵市铜官区罗家村小区17栋205室大萨达萨达萨达省",
+          tip: "这是备注萨达萨达萨达萨达"
         },
         {
           addTime: "2016-05-02 17:20:20",
@@ -204,8 +186,8 @@ export default {
           postName: "阿斯顿",
           postTel: "18089798765",
           realName: "王大帅",
-          postAddress: "安徽省铜陵市铜官区罗家村小区17栋205室大",
-          tip: "这是备注"
+          postAddress: "萨达萨达安徽省铜陵市铜官区罗家村小区17栋205室大",
+          tip: "这是备注萨达萨达"
         },
         {
           addTime: "2016-05-02 17:20:20",
@@ -237,16 +219,10 @@ export default {
   methods: {
     index(idx) {
       return idx + 1;
-    },
-    //点击大复制按钮
-    copyLink() {
-      console.log(1);
-      util.copyToClipboard(this.$refs.myLink);
-      this.$message({
-        message: "链接已复制到粘贴板",
-        type: "success"
-      });
     }
+  },
+  components: {
+    'card-model': cardModel
   }
 };
 </script>
@@ -255,79 +231,26 @@ export default {
 @import url("../../assets/less/mixin");
 
 .personal-card {
-  .card-header {
-    height: 730px;
-    display: flex;
-    .card-header-left {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      .left-tip {
-        font-size: 18px;
-        color: #333;
-        margin-bottom: 20px;
-      }
-      .left-btn {
-        .button-type120(#5adace,#6CE6DB);
-        width: 220px;
-      }
-    }
-    .card-header-right {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      .right-container {
-        width: 445px;
-        height: 450px;
-        border: 1px solid #ccc;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        div {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-        button {
-          .button-type120(#fff,#111);
-          margin-top: -50px;
-          width: 200px;
-          height: 50px;
-          border: 1px solid #333;
-          transition: all .5s;
-          &:hover {
-            color: #fff;
-          }
-        }
-      }
-    }
-  }
   .live-post-code,
   .back-post-code {
     border-top: 2px solid #ccc;
-    padding: 80px 0;
+    padding: 30px 0;
     .title {
       font-size: 18px;
       color: #333;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
       padding-left: 20px;
     }
     .explain {
-      padding: 40px;
+      padding: 30px;
       font-size: 14px;
       background-color: #f4f4f4;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
     .add-btn {
       .button-type120(#6aed6d ,#81F484);
       width: 150px;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
   }
 }
@@ -337,7 +260,6 @@ export default {
   .button-type60(#76bef5,#86C8F8);
   width: 40px;
   height: 26px;
-  margin: 3px;
 }
 .del-btn {
   .button-type60(#fb8888 ,#FB9E9E);

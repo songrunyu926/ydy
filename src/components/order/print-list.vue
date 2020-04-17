@@ -11,7 +11,7 @@
       actice-background-color="#5ADACE"
       :router="true"
     >
-      <el-menu-item index="/ydy/order/printlist/1">待打印</el-menu-item>
+      <el-menu-item index="/ydy/order/printlist/1"><el-badge :value="0" :max="99" class="item">待打印</el-badge></el-menu-item>
       <el-menu-item index="/ydy/order/printlist/2">已打印</el-menu-item>
       <el-menu-item index="/ydy/order/printlist/3">打印失败</el-menu-item>
       <el-menu-item index="/ydy/order/printlist/4">全部订单</el-menu-item>
@@ -42,7 +42,7 @@ export default {
 
 <style lang="less" scoped>
 .el-menu-user {
-  height: 50px;
+  height: 40px;
   border-bottom: 1px solid #ccc;
 }
 </style>

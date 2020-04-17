@@ -1,21 +1,8 @@
 <template>
   <el-card class="box-card">
     <!-- 头部 -->
-    <div
-      slot="header"
-      class="clearfix"
-      style="display: flex;justify-content: space-between;"
-    >
-      <span style="font-size: 20px;line-height: 42px;vertical-align: top;"
-        >已开通快递公司列表</span
-      >
-      <el-button
-        style="width: 260px;height:45px;font-size:20px;"
-        type="primary"
-        icon="el-icon-plus"
-        @click="addCompanyDialogVisible = true"
-        >添加更多快递公司</el-button
-      >
+    <div slot="header" class="clearfix">
+      <span>已开通快递公司列表</span>
     </div>
     <!-- 公司列表 -->
     <div class="company-list">
@@ -45,26 +32,33 @@
             </div>
           </div>
         </li>
+        <li class="add-company">
+          <div class="add-view" @click="addCompanyDialogVisible = true">
+            <i class="iconfont icon-xinzeng"></i>
+            <p>添加更多快递公司</p>
+          </div>
+        </li>
       </ul>
     </div>
     <!-- 表单弹出框 -->
     <el-dialog
       :title="chooseCompany.name"
       :visible.sync="detailFormVisible"
-      width="75%"
+      width="100%"
+      top="5vh"
       center
     >
-      <el-tabs v-model="courierType" @tab-click="handleClick">
+      <el-tabs v-model="courierType">
         <el-tab-pane label="标准快递" name="first">
-          <detail-form :company="chooseCompany"></detail-form>
+          <detail-form ref="companyForm" @closeDialog="closeDialog" :company="chooseCompany"></detail-form>
         </el-tab-pane>
-        <el-tab-pane label="到付" name="second">配置管理</el-tab-pane>
-        <el-tab-pane label="保价" name="third">角色管理</el-tab-pane>
-        <el-tab-pane label="隐私" name="fourth">定时任务补偿</el-tab-pane>
+        <el-tab-pane label="到付" name="second">敬请期待</el-tab-pane>
+        <el-tab-pane label="保价" name="third">敬请期待</el-tab-pane>
+        <el-tab-pane label="隐私" name="fourth">敬请期待</el-tab-pane>
       </el-tabs>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="detailFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="detailFormVisible = false"
+        <el-button @click="">取 消</el-button>
+        <el-button type="primary" @click="confirmForm"
           >确 定</el-button
         >
       </span>
@@ -76,11 +70,12 @@
       width="50%"
       center
     >
-      <el-row style="height: 300px" :gutter="24" type="flex" justify="center" align="middle">
-        <el-col :span="7" :push="3">
+      <el-row
+      >
+        <el-col  style="margin-top: 12px" :span="2" :offset="8">
           <span>快递公司:</span>
         </el-col>
-        <el-col :span="12" :push="1">
+        <el-col :span="12">
           <el-select v-model="value" placeholder="请选择快递公司">
             <el-option
               v-for="item in options"
@@ -148,7 +143,7 @@ export default {
         desc: ""
       },
       formLabelWidth: "120px",
-      courierType: "second", //dialog中的tab切换
+      courierType: "first", //dialog中的tab切换
       chooseCompany: {}, //当前选中的快递公司
       addCompanyDialogVisible: false, //快递公司dialog开关
       options: [
@@ -183,8 +178,14 @@ export default {
       this.chooseCompany = this.companyList[index];
       this.detailFormVisible = true;
     },
-    handleClick(tab, event) {
-      console.log(tab, event);
+    //确认快递公司详情
+    confirmForm() {
+      //触发子组件校验功能
+       this.$refs.companyForm.validataForm();
+    },
+    //关闭弹框
+    closeDialog() {
+      this.detailFormVisible = false
     }
   },
   components: {
@@ -197,21 +198,21 @@ export default {
 @import url("../../assets/less/mixin");
 
 .company-list {
-  padding: 80px;
+  padding: 30px 40px;
   ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-content: space-between;
     li {
-      width: 360px;
-      height: 340px;
+      width: 300px;
+      height: 210px;
       background-color: #f4f4f4;
-      margin-bottom: 30px;
-      padding: 40px;
+      margin-bottom: 15px;
+      padding: 10px;
       .company-top {
         border-bottom: 1px solid #666;
-        height: 100px;
+        height: 80px;
         display: flex;
         align-items: flex-start;
         .company-title {
@@ -222,30 +223,51 @@ export default {
           .company-name {
             color: #333333;
             font-weight: 700;
-            font-size: 18px;
+            font-size: 16px;
             line-height: 45px;
           }
         }
       }
       .company-bottom {
-        margin-top: 40px;
-        height: 180px;
+        margin-top: 20px;
+        height: 100px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        font-size: 14px;
         div {
           .view-btn {
             .button-type60(#5adace, #6ce6db);
             width: 80px;
           }
           .del-btn {
-            margin-left: 30px;
+            margin-left: 20px;
             .button-type60(#fff, #111);
             border: 1px solid #111;
             width: 80px;
             &:hover {
               color: #fff;
             }
+          }
+        }
+      }
+      &.add-company {
+        display: flex;
+          justify-content: center;
+          align-items: center;
+        div {
+          height: 160px;
+          width: 200px;
+          background-color: #5adace;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          align-items: center;
+          i {
+            font-size: 35px;
+          }
+          &:hover {
+            background: #6ce6db;
           }
         }
       }

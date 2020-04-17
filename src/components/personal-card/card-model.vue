@@ -26,8 +26,21 @@
 </template>
 
 <script>
+
+import {copyToClipboard} from "@/util";
+
 export default {
-  name: 'card-model'
+  name: 'card-model',
+  methods: {
+    //点击复制按钮
+    copyLink() {
+      copyToClipboard(this.$refs.myLink);
+      this.$message({
+        message: "链接已复制到粘贴板",
+        type: "success"
+      });
+    }
+  }
 }
 </script>
 
@@ -36,7 +49,7 @@ export default {
 @import url("../../assets/less/mixin");
 
   .card-model {
-    height: 730px;
+    height: 450px;
     display: flex;
     .card-header-left {
       flex: 1;
@@ -47,7 +60,11 @@ export default {
       .left-tip {
         font-size: 18px;
         color: #333;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
+      }
+      img {
+        width: 300px;
+        margin-bottom: 10px;
       }
       .left-btn {
         .button-type120(#5adace,#6CE6DB);
@@ -61,8 +78,8 @@ export default {
       justify-content: center;
       align-items: center;
       .right-container {
-        width: 445px;
-        height: 450px;
+        width: 350px;
+        height: 350px;
         border: 1px solid #ccc;
         display: flex;
         flex-direction: column;

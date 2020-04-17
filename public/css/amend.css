@@ -1,13 +1,18 @@
 /* 修改el-menu */
 .el-submenu__title {
-  padding: 0 5px !important;
-  margin: 0 15px;
+  margin: 0 10px;
+}
+.el-submenu__title:hover {
+  background: transparent !important;
+}
+.el-menu--horizontal>.el-submenu .el-submenu__title {
+  border: none !important;
 }
 
-.el-menu-item {
-  font-size: 16px !important;
-  height: 50px !important;
-  line-height: 50px !important;
+li.el-menu-item {
+  font-size: 14px !important;
+  height: 40px !important;
+  line-height: 40px !important;
   color: #111 !important;
   padding: 0 30px !important;
   border: 0 !important;
@@ -32,15 +37,11 @@
   background-color: rgba(0, 0, 0, .2) !important;
 }
 
-.el-menu--horizontal>.el-submenu .el-submenu__title {
-  height: 50px !important;
-  line-height: 50px !important;
+/* 修改表单样式 */ 
+.el-form-item__label {
+  font-size: 12px !important;
 }
 
-.el-menu--horizontal>.el-menu-item {
-  height: 50px !important;
-  line-height: 50px !important;
-}
 
 /* 修改el-tab */
 .el-tabs__item {
@@ -70,14 +71,6 @@
   height: 2px !important;
 }
 
-/* 修改省地市下拉框 */
-.area-select {
-  height: 40px !important;
-}
-
-.area-selected-trigger {
-  color: #bbb;
-}
 
 /* 修改弹出框头部dialog */
 .el-dialog__header {
@@ -89,21 +82,43 @@
   padding: 0 !important;
 }
 /* 修改表格样式 */
+
+.el-table th.el-table-column--selection {
+  background-color: #fff !important;
+}
 .el-table th{
   background-color: #5adace !important;
   color: #111 !important;
 }
+.cell {
+  font-size: 12px !important;
+}
+
 /* 修改拖拽上传 */
 .el-upload-dragger {
-  width: 351px !important;
-  height: 120px !important;
+  width: 381px !important;
+  height: 75px !important;
 }
 
 /* 修改单选组 */
 .el-radio-button__inner{
-  border: 1px solid #888 !important;
-  color: #888 !important;
+  border: 1px solid #333 !important;
+  color: #333 !important;
+  border-radius: 0 !important;
 }
+
+.el-input-group__append {
+  padding: 0 5px !important;
+  left: -1px;
+  border-left: 1px solid #fff;
+}
+/* 定义badge样式 */
+.item {
+  height: 20px;
+  line-height: 20px;
+  top: -1px;
+}
+
 /* 表格特殊字段文字颜色 */
 .blue {
   color: #0056cc;
@@ -117,4 +132,32 @@
 .gray {
   color: #999999;
 }
+
+
+/* 设置公共样式 */
+.marginT20 {
+  margin-top: 20px;
+}
+
+.width230 {
+  width: 257px;
+}
+
+.h4style {
+  margin: 5px 0 20px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+}
+
+/* 移入变色 本来是链接色 */
+.hover-red {
+  color: #0056cc;
+  cursor: pointer;
+}
+.hover-red:hover {
+  color: #f40 !important;
+}
+
+
 

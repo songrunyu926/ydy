@@ -40,7 +40,13 @@ import {
   Card,
   Dialog,
   Tag,
-  RadioButton
+  RadioButton,
+  OptionGroup,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  Cascader,
+  Popover
  } from 'element-ui'
 
 Vue.use(Button)
@@ -81,6 +87,12 @@ Vue.use(Card)
 Vue.use(Dialog)
 Vue.use(Tag)
 Vue.use(RadioButton)
+Vue.use(OptionGroup)
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Cascader)
+Vue.use(Popover)
 
 Vue.prototype.$loading = Loading.service;
 Vue.prototype.$msgbox = MessageBox;

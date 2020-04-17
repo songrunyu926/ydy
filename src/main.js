@@ -2,16 +2,17 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import api from './api/'
 import './plugins/element.js'
 import ydyPlugin from './plugin'
+import smartParse from 'vue-smart-parse';
 import './assets/style/theme/index.css'
 
-import 'vue-area-linkage/dist/index.css'; // 三级级联样式
-import VueAreaLinkage from 'vue-area-linkage';
 
 Vue.use(ydyPlugin)
-Vue.use(VueAreaLinkage)
+Vue.use(smartParse)
 
+Vue.prototype.$api = api
 Vue.config.productionTip = false
 
 //定义总线机制

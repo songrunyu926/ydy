@@ -2,44 +2,48 @@
   <div class="base-set">
     <div class="set-info">
       <el-form
-        :model="ruleForm"
+        :model="baseSetForm"
         :rules="rules"
-        ref="ruleForm"
+        ref="baseSetForm"
         label-width="100px"
         class="set-form"
       >
-        <el-form-item label="昵称:" prop="name">
-          <el-input placeholder="请输入昵称" v-model="ruleForm.nickName"></el-input>
+        <el-form-item label="昵称:" prop="nickName">
+          <el-input placeholder="请输入昵称" v-model="baseSetForm.nickName"></el-input>
         </el-form-item>
         <el-form-item label="个人简介:" prop="abstract">
           <el-input
             type="textarea"
-            :rows="7"
+            :rows="5"
             placeholder="请输入个人简介"
-            v-model="ruleForm.abstract"
+            v-model="baseSetForm.abstract"
           >
           </el-input>
         </el-form-item>
         <el-form-item label="性别:" required>
-          <el-radio-group v-model="ruleForm.gender">
-            <el-radio label="男"></el-radio>
-            <el-radio label="女"></el-radio>
+          <el-radio-group v-model="baseSetForm.gender">
+            <el-radio :label="1">男</el-radio>
+            <el-radio :label="0">女</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="国籍:" prop="country">
-          <el-select v-model="ruleForm.country" placeholder="请选择国籍">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-          </el-select>
+        <el-form-item label="国籍:" prop="country"> 
+          <el-country selectBg="selectBlue" groupBg="groupGray" ></el-country>
         </el-form-item>
         <el-form-item label="城市:" prop="city">
-          <el-area></el-area>
+           <el-cascader
+                size="large"
+                :options="options"
+                v-model="baseSetForm.city"
+                @change="handleChange"
+                style="width: 300px"
+              >
+              </el-cascader>
         </el-form-item>
         <el-form-item label="街道地址:" prop="detailAddress" >
-          <el-input v-model="ruleForm.detailAddress"></el-input>
+          <el-input v-model="baseSetForm.detailAddress"></el-input>
         </el-form-item>
         <el-form-item class="submit-button">
-          <el-button type="primary" @click="submitForm('ruleForm')"
+          <el-button type="primary" @click="submitForm('baseSetForm')"
             >更新信息</el-button
           >
         </el-form-item>
@@ -58,7 +62,7 @@
         multiple
         :limit="1"
       >
-        <button style=""><i class="iconfont icon-shangchuan"></i>更换头像</button>
+        <button><i class="iconfont icon-shangchuan"></i>更换头像</button>
       </el-upload>
     </div>
   </div>
@@ -66,60 +70,50 @@
 
 <script>
 
-import elArea from '@/components/country-and-area/el-area'
+import { regionData, CodeToText } from "element-china-area-data";
+import elCountry from '@/components/country-and-area/el-country'
 
 export default {
   name: "base-set",
   data() {
     return {
-      ruleForm: {
+      options: regionData,  //城市下拉数据
+      baseSetForm: {
         nickName: "",  //昵称
         abstract: "",  //个人简介
-        gender: "男",    //性别
+        gender: 1,    //性别
         country: "",   //国家
         city: "",      //城市
         detailAddress: ""  //街道地址
       },
+      //校验规则
       rules: {
-        name: [
-          { required: true, message: "请输入活动名称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        nickName: [
+          { required: true, message: "昵称不能为空", trigger: "blur" },
         ],
-        region: [
-          { required: true, message: "请选择活动区域", trigger: "change" }
+        country: [
+          { required: true, message: "请选择国籍", trigger: "blur" },
         ],
-        date1: [
-          {
-            type: "date",
-            required: true,
-            message: "请选择日期",
-            trigger: "change"
-          }
+        city: [
+          { required: true, message: "请选择城市", trigger: "blur" },
         ],
-        date2: [
-          {
-            type: "date",
-            required: true,
-            message: "请选择时间",
-            trigger: "change"
-          }
-        ],
-        type: [
-          {
-            type: "array",
-            required: true,
-            message: "请至少选择一个活动性质",
-            trigger: "change"
-          }
-        ],
-        resource: [
-          { required: true, message: "请选择活动资源", trigger: "change" }
-        ],
-        desc: [{ required: true, message: "请填写活动形式", trigger: "blur" }]
+        detailAddress: [
+          { required: true, message: "请输入您的街道地址", trigger: "blur" },
+        ]
       }
     };
   },
   methods: {
+    //城市数据转换
+    handleChange(value) {
+      let data =
+        CodeToText[value[0]] +
+        ", " +
+        CodeToText[value[1]] +
+        ", " +
+        CodeToText[value[2]];
+      console.log(data);
+    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -135,12 +129,16 @@ export default {
     }
   },
   components: {
-    'el-area': elArea
+    'el-country': elCountry
   },
   mounted() {
     //订阅省市区组件的消息 定义form中的city字段
-    this.bus.$on('chooseCity',city => {
-      this.ruleForm.city = city
+    this.bus.$on('selectCity',city => {
+      this.baseSetForm.city = city
+    })
+    //订阅国籍
+    this.bus.$on('selectCountry',country => {
+      this.baseSetForm.country = country
     })
   }
 };
@@ -156,12 +154,12 @@ export default {
     flex: 1;
     &.set-info {
       .set-form {
-        margin-top: 65px;
+        margin-top: 40px;
         &>* {
-          margin-bottom: 52px;
+          margin-bottom: 30px;
         }
         .submit-button {
-          margin-top: 60px;
+          margin-top: 40px;
         }
       }
     }
@@ -169,7 +167,7 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 200px;
+      padding-top: 50px;
       .username {
         margin: 40px auto 30px;
         color: #333;
@@ -179,8 +177,8 @@ export default {
         button {
           outline: none;
           display: block;
-          width: 220px;
-          height: 50px;
+          width: 180px;
+          height: 40px;
           color: #111;
           border: 1px solid #333;
           background-color: #fff;

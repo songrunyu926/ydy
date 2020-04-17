@@ -32,7 +32,7 @@ export const bbObj = {
     }
   },
   user: {
-    name: '用户管路',
+    name: '用户管理',
     children: {
       salesman: '业务员',
       negotiateuser: '协议用户',
@@ -64,5 +64,50 @@ export const bbObj = {
     children: {
       userreport: '用户报表'
     }
+  }
+}
+
+
+//校验规则
+
+//电话格式校验
+export const telRule = {
+  pattern: /^1[3456789]\d{9}$/,
+  message: "电话号码格式不正确",
+  trigger: "blur"
+}
+//身份证格式校验
+export const personalNumRule = {
+  pattern: /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
+  message: "身份证号码格式不正确",
+  trigger: "blur"
+}
+//金额 长宽高的校验 不小于0
+const checkNumber = (rule, value, callback) => {
+  let num = +value
+  if (!value) {
+    return callback(new Error('值不能为空'));
+  }
+  if (num <= 0) {
+    callback(new Error('值不能小于0'));
+  }
+  if (!/^[0-9]+\.?[0-9]*$/.test(value)) {
+    callback(new Error('必须为一个数字'));
+  } else {
+    callback();
+  };
+}
+
+export const numberRule = {
+  validator: checkNumber,
+  trigger: 'blur'
+}
+//类型自定义，类型不为空 
+export function ruleRequired(type, fieldName) {
+  return {
+    type,
+    required: true,
+    message: `${fieldName}不能为空`,
+    trigger: "change"
   }
 }

@@ -14,7 +14,7 @@
       <el-menu-item index="/ydy/personaldata/baseset">基本资料</el-menu-item>
       <el-menu-item index="/ydy/personaldata/accountbind">账号绑定</el-menu-item>
       <el-menu-item index="/ydy/personaldata/addressbook">地址簿</el-menu-item>
-      <el-menu-item index="/ydy/personaldata/notice">通知消息</el-menu-item>
+      <el-menu-item index="/ydy/personaldata/notice"><el-badge :value="200" :max="99" class="item">通知消息</el-badge></el-menu-item>
       <el-menu-item index="/ydy/personaldata/personalcard">个人名片</el-menu-item>
       <el-menu-item index="/ydy/personaldata/otherdevices">其他设置</el-menu-item>
     </el-menu>
@@ -45,7 +45,7 @@ export default {
 
 <style lang="less" scoped>
 .el-menu-user {
-  height: 50px !important;
+  height: 40px !important;
   border-bottom: 1px solid #ccc;
 }
 

@@ -7,7 +7,7 @@
       label-width="150px"
       class="demo-printForm"
     >
-      <el-form-item label="选择打印机:" prop="printer">
+      <el-form-item label="选择打印机:" prop="printer" style="margin-bottom: 60px">
         <el-select
           v-model="printForm.printer"
           placeholder="请选择打印机"
@@ -18,7 +18,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="输入运单号或E邮码:" prop="orderNum">
-        <el-input v-model="printForm.orderNum"></el-input>
+        <el-input v-model="printForm.orderNum" placeholder="请输入运单号或E邮码"></el-input>
       </el-form-item>
     </el-form>
     <button class="submit">快速打印</button>

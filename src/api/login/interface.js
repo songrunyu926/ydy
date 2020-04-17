@@ -1,19 +1,16 @@
 export default {
-  sendCode: { //获取手机登录验证码
-    url: '/sendcode',
-    method: 'get',
-    corsUrl: '/4000'
-  },
-  login_sms: { //手机登录
-    url: '/login_sms',
+  //获取短信验证码
+  sendCode: { 
+    url: '/plus/sys/getCode',
     method: 'post',
-    corsUrl: '/4000',
+    corsUrl: '/test'
+  },
+  //手机号注册
+  registerByMobile: { 
+    url: '/plus/sys/addUser',
+    method: 'post',
+    corsUrl: '/test',
     
-  },
-  login_pwd: {  //账号密码登录
-    url: '/login_pwd',
-    method: 'post',
-    corsUrl: '/4000'
   },
   autoLogin: {
     url: '/auto_login',

@@ -1,17 +1,16 @@
 import axios from "axios"
-import store from '../../vuex'
+import store from '../../store'
 
 const AxiosObj = axios.create({
-  //baseURL:"http://localhost:4000",
-  timeout:15000
+  timeout:10000
 })
 
 
 AxiosObj.interceptors.request.use(function (config) {
-   //需要token就带上
-   if (config.headers.needToken) {
-    config.headers.Authorization = store.state.token
-  }
+  //  //需要token就带上
+  //  if (config.headers.needToken) {
+  //   config.headers.Authorization = store.state.token
+  // }
   return config;
 }, function (error) {
   return Promise.reject(error);

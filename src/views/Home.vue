@@ -7,7 +7,12 @@
       <div class="container">
         <p class="breadcrumb-tip">您的位置:</p>
         <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item v-for="(item, index) in breadcrumbContent" :key="index">{{item}}</el-breadcrumb-item>
+          <el-breadcrumb-item
+            style="font-size:12px"
+            v-for="(item, index) in breadcrumbContent"
+            :key="index"
+            >{{ item }}</el-breadcrumb-item
+          >
         </el-breadcrumb>
       </div>
     </section>
@@ -19,10 +24,17 @@
     <main-footer></main-footer>
     <!-- 侧栏 微信下单等  -->
     <ul class="app-tip">
-      <li>
-        <i class="iconfont icon-erweima"></i>
-        <span>微信下单</span>
-      </li>
+      <el-popover
+        placement="left"
+        width="200"
+        trigger="click"
+      >
+      <img src="../assets/images/login/login-ercode.png" style="width: 200px" alt="网络出错">
+        <li slot="reference">
+          <i class="iconfont icon-erweima"></i>
+          <span>微信下单</span>
+        </li>
+      </el-popover>
       <li @click="$router.push('/ydy/send')">
         <i class="iconfont icon-dingdan"></i>
         <span>添加订单</span>
@@ -31,7 +43,6 @@
         <i class="iconfont icon-fanhuidingbu1"></i>
       </li>
     </ul>
-    
   </div>
 </template>
 
@@ -78,19 +89,15 @@ export default {
       breadcrumbArr.push(bbObj[pathArr[1]].name);
       //导航数组的第三个位置
       if (pathArr[1] === "order") {
-        breadcrumbArr.push(
-          (bbObj[pathArr[1]]).children[pathArr[2]]['name']
-        );
+        breadcrumbArr.push(bbObj[pathArr[1]].children[pathArr[2]]["name"]);
         //导航第四个位置
         breadcrumbArr.push(
           bbObj[pathArr[1]].children[pathArr[2]].type[+pathArr[3] - 1]
         );
       } else {
-        breadcrumbArr.push(
-          bbObj[pathArr[1]].children[pathArr[2]]
-        );
+        breadcrumbArr.push(bbObj[pathArr[1]].children[pathArr[2]]);
       }
-      return breadcrumbArr
+      return breadcrumbArr;
     }
   }
 };
@@ -99,9 +106,11 @@ export default {
 .main {
   background-color: #f4f4f4;
   .app-breadcrumb {
-    font-size: 14px;
-    height: 100px;
-    line-height: 100px;
+    font-size: 12px;
+    height: 25px;
+    line-height: 25px;
+    margin-top: 20px;
+    margin-bottom: 5px;
     .container {
       width: 1200px;
       height: 100%;
@@ -120,12 +129,12 @@ export default {
 
   .app-tip {
     position: fixed;
-    right: 50px;
+    right: 30px;
     top: 50%;
     margin-top: -136px;
-    li {
-      width: 90px;
-      height: 90px;
+    /deep/ li {
+      width: 70px;
+      height: 70px;
       background-color: #fff;
       text-align: center;
       display: flex;
@@ -133,20 +142,24 @@ export default {
       justify-content: space-evenly;
       align-items: center;
       margin-bottom: 2px;
+      cursor: pointer;
+      &:hover {
+        background-color: #ddd;
+      }
       span {
-        font-size: 14px;
+        font-size: 12px;
         color: #333;
       }
       .icon-erweima {
-        font-size: 35px;
+        font-size: 30px;
         color: #6aed6d;
       }
       .icon-dingdan {
-        font-size: 35px;
+        font-size: 30px;
         color: #76bef5;
       }
       .icon-fanhuidingbu1 {
-        font-size: 40px;
+        font-size: 35px;
         color: #666;
       }
     }

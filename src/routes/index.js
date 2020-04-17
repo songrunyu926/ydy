@@ -60,7 +60,7 @@ export default [
       },
       {
         path:'/ydy',
-        redirect: 'personaldata'
+        redirect: 'send'
       }
     ],
 

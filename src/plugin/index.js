@@ -1,8 +1,10 @@
+import dayjs from 'dayjs'
+
 let ydyPlugin = Object.create(null)
 
 ydyPlugin.install = function (Vue, options) {
   //显示激活状态的过滤器
-  Vue.filter('stateShow', function (state) {
+  Vue.filter('stateShow', function(state) {
     switch (state) {
       case 0:
         return '激活'
@@ -15,7 +17,7 @@ ydyPlugin.install = function (Vue, options) {
     }
   })
   //状态颜色改变
-  Vue.filter('stateColor', function (state) {
+  Vue.filter('stateColor', function(state) {
     switch (state) {
       case 0:
         return 'green'
@@ -26,6 +28,10 @@ ydyPlugin.install = function (Vue, options) {
       default:
         break;
     }
+  })
+  //时间格式过滤器
+  Vue.filter('timeFormat', function(time) {
+    return dayjs(time).format('YYYY-MM-DD')
   })
 }
 

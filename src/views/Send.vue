@@ -18,14 +18,14 @@
       <el-menu-item index="/ydy/send/fastprint">快速打印</el-menu-item>
     </el-menu>
     <router-view></router-view>
-    <div class="order-list">
-      <el-badge :value="200" :max="99">
-        <span>管理订单</span>
+    <div @click="$router.push('/ydy/order/orderlist/1')" class="order-list">
+      <el-badge :value="200" :max="99" class="item">
+        管理订单
       </el-badge>
     </div>
-    <div class="print-list">
+    <div @click="$router.push('/ydy/order/printlist/1')" class="print-list">
       <el-badge :value="200" :max="99">
-        <span>管理打印任务</span>
+        管理打印任务
       </el-badge>
     </div>
   </el-card>
@@ -54,36 +54,41 @@ export default {
 @import url("../assets/less/mixin");
 
 .el-menu-user {
-  height: 50px;
+  height: 40px;
   border-bottom: 1px solid #ccc;
 }
-.order-list{
+.order-list {
   position: absolute;
   top: 0;
   right: 120px;
-  background-color: #76BEF5;
-  height: 50px;
+  background-color: #76bef5;
+  height: 40px;
   width: 130px;
   margin-right: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   &:hover {
-    background: #86C8F8;
+    background: #86c8f8;
   }
 }
 .print-list {
   position: absolute;
   top: 0;
   right: 0;
-  background: #EFDD49;
-  height: 50px;
+  background: #efdd49;
+  height: 40px;
   width: 160px;
-  display: flex;
+   display: flex;
   justify-content: center;
   align-items: center;
-   &:hover {
-    background: #F6E661;
+  cursor: pointer;
+   .el-badge {
+    top: 0 !important;
+  }
+  &:hover {
+    background: #f6e661;
   }
 }
 </style>

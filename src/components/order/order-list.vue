@@ -11,7 +11,9 @@
       actice-background-color="#5ADACE"
       :router="true"
     >
-      <el-menu-item index="/ydy/order/orderlist/1">待确定</el-menu-item>
+      <el-menu-item index="/ydy/order/orderlist/1">
+        <el-badge :value="200" :max="99" class="item">待确定</el-badge></el-menu-item
+      >
       <el-menu-item index="/ydy/order/orderlist/2">已确定</el-menu-item>
       <el-menu-item index="/ydy/order/orderlist/3">已预约</el-menu-item>
       <el-menu-item index="/ydy/order/orderlist/4">已取消</el-menu-item>
@@ -26,13 +28,10 @@
 export default {
   name: "order-list",
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    }
+    handleSelect(key, keyPath) {}
   },
   computed: {
     orderIndex() {
@@ -44,7 +43,9 @@ export default {
 
 <style lang="less" scoped>
 .el-menu-user {
-  height: 50px;
+  height: 40px;
   border-bottom: 1px solid #ccc;
 }
+
+
 </style>

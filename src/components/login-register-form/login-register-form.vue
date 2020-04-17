@@ -3,12 +3,12 @@
   <form class="login-mobile">
         <div class="mobile-info">
           <i class="iconfont icon-shouji"></i>
-          <input type="tel" placeholder="请输入电话号码" />
+          <input type="tel" v-model.number="mobile" placeholder="请输入电话号码" />
         </div>
         <div class="yam-info">
           <i class="iconfont icon-yanzhengma"></i>
-          <input type="tel" placeholder="请输入验证码" />
-          <button>发送验证码</button>
+          <input v-model.number="code"  placeholder="请输入验证码" />
+          <button @click.prevent="getCode1">发送验证码</button>
         </div>
         <div>
           <button @click.prevent="loginOrRegisterSubmit" class="login-btn">{{isLogin? '登录' : '注册'}}</button>
@@ -21,16 +21,8 @@ export default {
   name: 'login-register-form',
   data() {
     return {
-      
-    }
-  },
-  computed: {
-    isLogin() {
-      if (this.$route.path === "/login") {
-        return true;
-      } else if (this.$route.path === "/register") {
-        return false;
-      }
+      mobile: undefined,
+      code: undefined, //手机验证码
     }
   },
   methods: {
@@ -40,6 +32,21 @@ export default {
         this.$router.replace('/ydy')
       }else {
         this.$emit('MobileComp')
+      }
+    },
+    async getCode1() {
+      
+      //let result = await this.$api.login.sendCode({mobile:"18356289987"})
+      let result = await this.$api.login.registerByMobile({mobile:"18356289987",msgCode:"1161"})
+      console.log(result)
+    },
+  },
+  computed: {
+    isLogin() {
+      if (this.$route.path === "/login") {
+        return true;
+      } else if (this.$route.path === "/register") {
+        return false;
       }
     }
   }

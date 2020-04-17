@@ -43,11 +43,8 @@ export default {
 
 <style lang="less" scoped>
 .el-menu-user {
-  height: 50px !important;
+  height: 40px !important;
   border-bottom: 1px solid #ccc;
-  .el-menu-item {
-    
-  }
 }
 
 </style>

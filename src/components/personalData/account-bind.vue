@@ -1,10 +1,10 @@
 <template>
   <div class="bind">
-    <el-row class="mobile" :gutter="20">
-      <el-col :span="5">
+    <el-row class="mobile">
+      <el-col :span="5" :push="1">
         <span>您绑定的手机号:</span>
       </el-col>
-      <el-col :span="9" :offset="1">
+      <el-col :span="9" :push="1">
         <el-input placeholder="未绑定手机" v-model="mobile" :disabled="true">
         </el-input>
       </el-col>
@@ -12,11 +12,11 @@
         <button>换绑</button>
       </el-col>
     </el-row>
-    <el-row class="wechat" :gutter="20">
-     <el-col :span="5">
+    <el-row class="wechat">
+     <el-col :span="5" :push="1">
         <span>您绑定的微信号:</span>
       </el-col>
-      <el-col :span="9" :offset="1">
+      <el-col :span="9" :push="1">
         <el-input placeholder="未绑定微信" v-model="wechatAccount" :disabled="true">
         </el-input>
       </el-col>
@@ -44,7 +44,7 @@ export default {
 @import url('../../assets/less/mixin');
 
 .bind {
-  padding: 200px;
+  padding: 100px;
   .mobile {
     margin-bottom: 150px;
     span {
