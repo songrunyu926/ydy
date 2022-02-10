@@ -13,7 +13,7 @@
     "dayjs": "^1.8.23",
     "element-china-area-data": "^4.1.2",
     "element-ui": "^2.4.5",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "vue": "^2.6.11",
     "vue-piczoom": "^1.0.6",
     "vue-router": "^3.1.5",
